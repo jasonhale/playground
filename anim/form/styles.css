@@ -1,0 +1,11 @@
+body {
+  color: rebeccapurple;
+}
+
+textarea:valid {
+  border: solid 1px green;
+}
+
+textarea:invalid {
+  border: solid 1px red;
+}

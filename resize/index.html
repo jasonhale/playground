@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Resizing</title>
+    <style>
+      label { display: block }
+      .main {
+        width: 100%;
+        overflow: hidden;
+      }
+      .inner {
+        display: flex;
+        flex-flow: row nowrap;
+        width: fit-content;
+        gap: .5em;
+      }
+      a {
+        flex: 0 0 0%;
+        white-space: nowrap;
+      }
+      .overflow {
+        display: flex;
+        flex-flow: column nowrap;
+      }
+    </style>
+  </head>
+  <body>
+    <div><label for="toggle"><input id="toggle" class="toggle" type="checkbox" checked/></label></div>
+    <section class="main">
+      <div class="inner">
+        <a>Aardvark</a>
+        <a>Bobcat</a>
+        <a>Cougar</a>
+        <a>Dolphin</a>
+        <a>Elephant</a>
+        <a>Fire Ant</a>
+        <a>Giraffe</a>
+        <a>Horse</a>
+      </div>
+    </section>
+    <section class="overflow"></section>
+  </body>
+  <script>
+    var main = document.querySelector('.main'),
+        inner = document.querySelector('.inner'),
+        overflow = document.querySelector('.overflow');
+
+    var list = [
+      'Aardvark',
+      'Bobcat',
+      'Cougar',
+      'Dolphin',
+      'Elephant',
+      'Fire Ant',
+      'Giraffe',
+      'Horse'
+    ];
+
+    var output = [],
+        over = [];
+
+    function buildList() {
+      // clear out
+      inner.innerHTML = '';
+      overflow.innerHTML = '';
+
+      // build
+      let newinner = '',
+            newoverflow = '';
+      output.map(o => newinner += `<a>${o}</a>`);
+      over.map(o => newoverflow += `<a>${o}</a>`);
+      
+      // insert
+      inner.innerHTML = newinner;
+      overflow.innerHTML = newoverflow;
+    }
+
+    const resizeObserver = new ResizeObserver(entries => {
+      for(let entry of entries) {
+        if (entry.contentBoxSize) {
+          const contentBoxSize = Array.isArray(entry.contentBoxSize) ? entry.contentBoxSize[0] : entry.contentBoxSize;
+
+          const outersize = contentBoxSize.inlineSize;
+          const innersize = entry.target.children[0].clientWidth;
+          
+          if (innersize > outersize) {
+            console.log(`>>> POP! <<< :: >>> ${outersize}/${innersize}`);
+
+            let drop = output.pop();
+            over.unshift(drop);
+            // console.log({ drop, output, over });
+
+            buildList();
+          } else if (over.length && (innersize < outersize)) {
+            let place = over.pop();
+            output.push(place);
+
+            buildList();
+          }
+        }
+      }
+
+      console.log('size changed');
+    });
+
+    output = list;
+    buildList();
+    resizeObserver.observe(main);
+    // resizeObserver.observe(inner);
+  </script>
+</html>
