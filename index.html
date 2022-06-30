@@ -1,31 +1,71 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Playground</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body>
+<head>
+  <title>Playground</title>
+  <style>
+    :root {
+      --bodybg: hsl(48, 61%, 75%);
+      --text-color: hsla(0, 0%, 0%, 0.8);
+      --block-size: 20rem;
+    }
+    * { box-sizing: border-box; }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bodybg: hsl(0, 0%, 10%);
+        --text-color: rgba(255, 247, 219, 0.8);
+      }
+    }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background-color: var(--bodybg);
+      color: var(--text-color);
+    }
+    header {
+      padding: 0 2rem;
+    }
+    main {
+      padding: 2rem 4rem;
+    }
+    nav {
+      display: flex;
+      flex-flow: row wrap;
+      gap: 1rem;
+    }
+    .i {
+      --ibg: hsl(0, 100%, 50%);
 
-    <div class="ani1">
-      <span></span>
-    </div>
+      display: inline-flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      flex: 0 0 var(--block-size);
+      padding: .3rem;
+      width: var(--block-size);
+      height: var(--block-size);
+      background-color: var(--ibg);
+      font-size: 3rem;
+      color: var(--text-color);
+      transition: filter .5s ease-in-out;
+      text-decoration: none;
+    }
+      .i:hover {
+        filter: hue-rotate(45deg);
 
-    <div class="ani2">
-      <svg>
-        <circle cx="125" cy="125" r="120"/>
-        <polygon/>
-      </svg>
-    </div>
-
-    <div class="ani3">
-      <svg>
-        <filter id="motion-blur" x="-25%" width="150%" color-interpolation-filters="sRGB">
-          <feGaussianBlur in="SourceGraphic"/>
-        </filter>
-        <circle class="c" r="75" cx="100" cy="75" fill="rgb(30, 240, 200)" filter="url(#motion-blur)"/>
-      </svg>
-    </div>
-    
-    <script src="main.js"></script>
-  </body>
+      }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Playground</h1>
+    <p>Just a place to goof-off and try things out</p>
+  </header>
+  <main>
+    <nav>
+      <a class="i" href="/playground">playground</a>
+      <a class="i" href="/animation">animation</a>
+      <a class="i" href="/intersection">intersection</a>
+      <a class="i" href="/pixels">pixels</a>
+      <a class="i" href="/resize">resize</a>
+    </nav>
+  </main>
+</body>
 </html>
