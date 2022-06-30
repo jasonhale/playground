@@ -2,9 +2,15 @@
   /* colors */
 
   --black: #000;
+  --white: #fff;
   --robe: hsl(200, 100%, 62%);
   --tan1: hsl(44, 100%, 49%);
   --tan2: hsl(43, 100%, 34%);
+
+  --tanl: var(--tan1);
+  --tand: var(--tan2);
+  --redl: hsl(0, 100%, 50%);
+  --redd: hsl(0, 100%, 30%);
 }
 
 body {
