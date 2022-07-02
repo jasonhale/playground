@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Navigation</title>
+    <style>
+      section {
+        margin-bottom: 2rem;
+      }
+      .nav.radial {
+        --width: 2rem;
+
+        position: fixed;
+        top: .5rem;
+        right: .5rem;
+        width: var(--width);
+        height: var(--width);
+        border-radius: 50%;
+        background-color: red;
+      }
+      .nav.radial .i {
+        background-color: rgba(0 255 0 / .2);
+        position: absolute;
+        top: 0;
+        right: 50%;
+        display: flex;
+        align-items: center;
+        height: var(--width);
+        width: 0;
+        transform-origin: center right;
+        transform: translateY(calc(var(--width) / 2)), rotate(-.125turn);
+        transition: all .2s;
+        overflow: hidden;
+        opacity: 0;
+      }
+      .nav.radial:hover .i {
+        --turn: -.25turn;
+
+        width: 500%;
+        opacity: 1;
+      }
+
+      .nav.radial:hover .i:nth-child(1) {
+        transform: rotate(calc(var(--turn) / 6 * 0));
+      }
+      .nav.radial:hover .i:nth-child(2) {
+        transform: rotate(calc(var(--turn) / 6 * 1));
+      }
+      .nav.radial:hover .i:nth-child(3) {
+        transform: rotate(calc(var(--turn) / 6 * 2));
+      }
+      .nav.radial:hover .i:nth-child(4) {
+        transform: rotate(calc(var(--turn) / 6 * 3));
+      }
+      .nav.radial:hover .i:nth-child(5) {
+        transform: rotate(calc(var(--turn) / 6 * 4));
+      }
+      .nav.radial:hover .i:nth-child(6) {
+        transform: rotate(calc(var(--turn) / 6 * 5));
+      }
+      .nav.radial:hover .i:nth-child(7) {
+        transform: rotate(calc(var(--turn) / 6 * 6));
+      }
+    </style>
+    <link href="/styles.css" rel="stylesheet">
+    <script src="/navigation.js"></script>
+  </head>
+  <body>
+    <!-- <playground-nav home radial></playground-nav> -->
+
+    <nav class="nav radial">
+      <a class="i" href="/">home</a>
+      <a class="i" href="/navigation/animation">animation</a>
+      <a class="i" href="/navigation/intersection">intersection</a>
+      <a class="i" href="/navigation/pixels">pixels</a>
+      <a class="i" href="/navigation/playground">playground</a>
+      <a class="i" href="/navigation/resize">resize</a>
+      <a class="i" href="/navigation/navigation">navigation</a></nav>
+    </nav>
+    <header>
+      <h1>Navigation</h1>
+      <p>Page to showcase the web-component for the navigation on these pages.</p>
+    </header>
+    <main>
+      <section>
+        <h2>Flyout</h2>
+        <p>Showing in the top right.</p>
+      </section>
+
+      <section>
+        <h2>Inline</h2>
+        <p>Good 'ol standard.</p>
+        <playground-nav home></playground-nav>
+      </section>
+
+      <section>
+        <h2>Grid</h2>
+        <p>Like on the homepage.  Good for a big central display.</p>
+        <playground-nav grid home></playground-nav>
+      </section>
+    </main>
+  </body>
+</html>

@@ -2,59 +2,8 @@
 <html>
 <head>
   <title>Playground</title>
-  <style>
-    :root {
-      --bodybg: hsl(48, 61%, 75%);
-      --lighttext: hsla(36, 100%, 84%, 1); /* navahowhite */
-      --darktext: hsla(0, 0%, 0%, 0.8);
-      --text-color: var(--darktext);
-      --isize: 20rem;
-      --ibg: hsl(0, 100%, 50%);
-    }
-    * { box-sizing: border-box; }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bodybg: hsl(0, 0%, 10%);
-        --text-color: var(--lighttext);
-      }
-    }
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background-color: var(--bodybg);
-      color: var(--text-color);
-    }
-    header {
-      padding: 0 2rem;
-    }
-    main {
-      padding: 2rem 4rem;
-    }
-    nav {
-      display: flex;
-      flex-flow: row wrap;
-      gap: 1rem;
-    }
-    .i {
-      display: inline-flex;
-      align-items: flex-end;
-      justify-content: flex-end;
-      flex: 0 0 var(--isize);
-      padding: .3rem;
-      width: var(--isize);
-      height: var(--isize);
-      background-color: var(--ibg);
-      font-size: 3rem;
-      color: var(--text-color);
-      transition: filter .2s ease-in-out;
-      text-decoration: none;
-      text-shadow: 2rem .8rem .3rem rgba(0 0 0 / .3);
-      overflow: hidden;
-    }
-      .i:hover {
-        filter: hue-rotate(45deg);
-
-      }
-  </style>
+  <link rel="stylesheet" href="styles.css">
+  <script src="navigation.js"></script>
 </head>
 <body>
   <header>
@@ -62,13 +11,14 @@
     <p>Just a place to goof-off and try things out</p>
   </header>
   <main>
-    <nav>
+    <!-- <nav>
       <a class="i" href="playground">playground</a>
       <a class="i" href="animation">animation</a>
       <a class="i" href="intersection">intersection</a>
       <a class="i" href="pixels">pixels</a>
       <a class="i" href="resize">resize</a>
-    </nav>
+    </nav> -->
+    <playground-nav grid></playground-nav>
   </main>
 </body>
 </html>
