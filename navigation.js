@@ -49,9 +49,9 @@ nav.grid .i {
   text-shadow: 2rem .8rem .3rem rgba(0 0 0 / .3);
   overflow: hidden;
 }
-nav.grid .i:hover {
+nav.grid .i:hover,
+nav.grid .i:focus {
   filter: hue-rotate(45deg);
-  
 }
 `;
 const stylesheet = new CSSStyleSheet();
