@@ -1,4 +1,4 @@
-const HOME = window.location.hostname.includes('127') ? '' : '/playground';
+const HOME = window.location.hostname.includes('127') ? '' : 'playground';
 
 // update this whenever the pages change.
 const PAGES = [
