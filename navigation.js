@@ -19,6 +19,9 @@ nav {
   flex-flow: row wrap;
   gap: 1rem;
 }
+nav .i {
+  color: var(--text);
+}
 `;
 
 const RADIAL_CSS = `
@@ -158,6 +161,8 @@ class PlaygroundNav extends HTMLElement {
     // set initial links
     PAGES.forEach((page, idx) => this.createAnchor(page, page, idx));
 
+    // TODO: set CSS to divide by # of nav items.  Is currently 6. 
+
     this.shadowRoot.append(this.basestyles, this.wrapper);
   }
 
@@ -169,7 +174,7 @@ class PlaygroundNav extends HTMLElement {
 
   createAnchor = (label, to, i) => {
     const a = document.createElement('a');
-    a.setAttribute('class', `i i${i}`);
+    a.setAttribute('class', `i`);
     a.setAttribute('href', `${HOME && `/${HOME}`}/${to}/`); // TODO: Fix homepage link logic.
     a.setAttribute('style', `--index: ${i}`);
     a.innerText = label;
