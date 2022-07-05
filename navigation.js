@@ -175,7 +175,7 @@ class PlaygroundNav extends HTMLElement {
   createAnchor = (label, to, i) => {
     const a = document.createElement('a');
     a.setAttribute('class', `i`);
-    a.setAttribute('href', `${HOME && `/${HOME}`}/${to}/`); // TODO: Fix homepage link logic.
+    a.setAttribute('href', `${HOME && `/${HOME}`}${to && `/${to}`}/`);
     a.setAttribute('style', `--index: ${i}`);
     a.innerText = label;
     this.wrapper.append(a);
@@ -202,7 +202,7 @@ class PlaygroundNav extends HTMLElement {
     if (home) {
       this.clearAnchors();
       [
-        { label: 'home', to: HOME},
+        { label: 'home', to: ''},
         ...PAGES.map(p => ({ label: p, to: p }))
       ].forEach((a, i) =>
         this.createAnchor(a.label, a.to, i)
