@@ -1,4 +1,4 @@
-const HOME = window.location.hostname.includes('127') ? '' : 'playground';
+const HOME = (window.location.hostname.includes('127') || window.location.hostname.includes('localhost')) ? '' : 'playground';
 
 // update this whenever the pages change.
 const PAGES = [
@@ -29,6 +29,8 @@ nav.radial {
   --navsize: 2rem;
   --turn: -.25turn;
   --bgcolor: red;
+
+  --shift-distance: -5rem;
 
   position: fixed;
   top: .5rem;
@@ -102,14 +104,17 @@ nav.radial:hover .i,
 nav.radial:focus-within .i {
   opacity: 1;
 }
-
+`;
+/**
+ * Removed this bit of CSS and moved into WC.
+ * Will bbe added later with the divisor (here, "6") calculated based on the number of items.
+ * 
 nav.radial:hover .i:nth-child(n),
 nav.radial:focus-within .i:nth-child(n) {
   transform:
     rotate(calc(var(--turn) / 6 * var(--index)))
-    translateX(-5rem);
-}
-`;
+    translateX(var(--shift-distance));
+ */
 
 const GRID_CSS = `
 nav.grid {
@@ -161,8 +166,6 @@ class PlaygroundNav extends HTMLElement {
     // set initial links
     PAGES.forEach((page, idx) => this.createAnchor(page, page, idx));
 
-    // TODO: set CSS to divide by # of nav items.  Is currently 6. 
-
     this.shadowRoot.append(this.basestyles, this.wrapper);
   }
 
@@ -193,7 +196,10 @@ class PlaygroundNav extends HTMLElement {
 
   connectedCallback() {
     const { grid, home, radial } = this.getAtts();
+    this.extraStyles = document.createElement('style');
+    this.shadowRoot.append(this.extraStyles);
 
+    // Grid-based layout
     if (grid) {
       this.wrapper.classList.add('grid');
     }
@@ -209,8 +215,19 @@ class PlaygroundNav extends HTMLElement {
       );
     }
     
+    // Flyout
     if (radial) {
       this.wrapper.classList.add('radial');
+      const nodeCount = this.wrapper.querySelectorAll('.i').length;
+      const divisor = nodeCount > 0 ? (nodeCount - 1) : 0;
+      this.extraStyles.textContent = `
+nav.radial:hover .i:nth-child(n),
+nav.radial:focus-within .i:nth-child(n) {
+  transform:
+    rotate(calc(var(--turn) / ${divisor} * var(--index)))
+    translateX(var(--shift-distance));
+}
+`;
     }
 
     // mark current page
