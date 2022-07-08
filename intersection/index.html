@@ -120,10 +120,6 @@
         console.log('el', el);
         const isShowing = !el.classList.contains(CLASS);
 
-        if (entry === inner) {
-          console.log('INNER!');
-        }
-        
         if (isShowing !== entry.isIntersecting) {
           el.classList.toggle(CLASS);
 
@@ -136,8 +132,6 @@
       console.log('entries', entries);
     };
 
-
-    var observers = [];
     var observerOptions = {
       root: outer,
       rootMargin: '0px',
@@ -145,7 +139,6 @@
     };
     var observer = new IntersectionObserver(intersectionCallback, observerOptions);
     var innards = document.querySelectorAll('.inner a');
-    observer.observe(inner);
     innards.forEach(el => observer.observe(el));
   </script>
 </html>
