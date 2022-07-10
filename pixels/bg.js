@@ -197,3 +197,8 @@ function generateBoxShadow(mtx, xOffset = 0, yOffset = 0) {
 // var boxShadow = boxShadowArr.join(', ');
 
 const ans = generateBoxShadow(firesprite_1);
+
+const mageBS = generateBoxShadow(blackmage);
+const mage_spellBS = generateBoxShadow(mage_spell);
+const fira_1BS = generateBoxShadow(fira_1);
+const fira_2BS = generateBoxShadow(fira_2);
