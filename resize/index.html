@@ -3,6 +3,15 @@
   <head>
     <title>Resizing</title>
     <style>
+      .adjust {
+        padding: 2rem 4rem;
+        border-style: solid;
+        border-color: rgba(200 0 0 / .5);
+        border-width: 50px 100px;
+        border-style: inset;
+        resize: horizontal;
+        overflow: hidden;
+      }
       label { display: block }
       .main {
         width: 100%;
@@ -28,20 +37,23 @@
   </head>
   <body>
     <playground-nav home></playground-nav>
-    <div><label for="toggle"><input id="toggle" class="toggle" type="checkbox" checked/></label></div>
-    <section class="main">
-      <div class="inner">
-        <a>Aardvark</a>
-        <a>Bobcat</a>
-        <a>Cougar</a>
-        <a>Dolphin</a>
-        <a>Elephant</a>
-        <a>Fire Ant</a>
-        <a>Giraffe</a>
-        <a>Horse</a>
+    <main>
+      <div class="adjust">
+        <section class="main">
+          <div class="inner">
+            <a>Aardvark</a>
+            <a>Bobcat</a>
+            <a>Cougar</a>
+            <a>Dolphin</a>
+            <a>Elephant</a>
+            <a>Fire Ant</a>
+            <a>Giraffe</a>
+            <a>Horse</a>
+          </div>
+        </section>
+        <section class="overflow"></section>
       </div>
-    </section>
-    <section class="overflow"></section>
+    </main>
   </body>
   <script>
     var main = document.querySelector('.main'),
@@ -91,7 +103,6 @@
 
             let drop = output.pop();
             over.unshift(drop);
-            // console.log({ drop, output, over });
 
             buildList();
           } else if (over.length && (innersize < outersize)) {
@@ -109,6 +120,5 @@
     output = list;
     buildList();
     resizeObserver.observe(main);
-    // resizeObserver.observe(inner);
   </script>
 </html>

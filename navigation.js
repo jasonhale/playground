@@ -18,8 +18,11 @@ nav {
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
+  background-color: rgba(200 0 0 / .3);
 }
 nav .i {
+  display: block;
+  padding: 1rem 1.5rem;
   color: var(--text);
 }
 `;
