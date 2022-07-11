@@ -127,6 +127,7 @@ nav.grid {
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
+  background: none;
 }
 nav.grid .i {
   display: inline-flex;
