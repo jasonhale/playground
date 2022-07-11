@@ -1,13 +1,13 @@
 const HOME = (window.location.hostname.includes('127') || window.location.hostname.includes('localhost')) ? '' : 'playground';
 
 // update this whenever the pages change.
-const PAGES = [
-  'animation',
-  'intersection',
-  'pixels',
-  'playground',
-  'resize',
-  'navigation'
+const EXAMPLES = [
+  { label: 'animation', to: 'examples/animation' },
+  { label: 'intersection', to: 'examples/intersection' },
+  { label: 'pixels', to: 'examples/pixels' },
+  { label: 'playground', to: 'examples/playground' },
+  { label: 'resize', to: 'examples/resize' },
+  { label: 'navigation', to: 'examples/navigation' }
 ];
 
 const BASE_CSS = `
@@ -168,7 +168,7 @@ class PlaygroundNav extends HTMLElement {
     // nav reference
     this.wrapper = document.createElement('nav');
     // set initial links
-    PAGES.forEach((page, idx) => this.createAnchor(page, page, idx));
+    EXAMPLES.forEach(({ label, to }, idx) => this.createAnchor(label, to, idx));
 
     this.shadowRoot.append(this.basestyles, this.wrapper);
   }
@@ -213,7 +213,7 @@ class PlaygroundNav extends HTMLElement {
       this.clearAnchors();
       [
         { label: 'home', to: ''},
-        ...PAGES.map(p => ({ label: p, to: p }))
+        ...EXAMPLES
       ].forEach((a, i) =>
         this.createAnchor(a.label, a.to, i)
       );
