@@ -1,0 +1,103 @@
+/*
+
+@green: hsl(90, 100%, 49%);
+//rgb(124,252,0) : #7cfc00 : lawngreen : hsl(90, 100%, 49%)
+@dkgreen: darken(@green, 40%);
+
+.generate-menu-items(@n, @i : 0) when (@i =< @n) {
+	.navitem-@{i} {
+		transform: rotate(((-360deg / @n) * @i));
+		//opacity: (@i+2)/10;
+		// transform: skewY(-18deg) rotate(((-360deg/@n)*@i));
+		.navtext {
+			transform: rotate(((360deg / @n) * @i)) translate(20%, 20%);
+		}
+	}
+	.generate-menu-items(@n, (@i + 1));
+}
+.generate-hover-states(@n, @i : 0) when (@i =< @n) {
+	#i@{i}:checked ~ nav .navitem-@{i} {
+		//	#i@{i} + .navitem-@{i} {
+		background-color: darken(@green, 5%);
+	}
+	.generate-hover-states(@n,(@i+1));
+}
+
+body {
+	background-color: black;
+	color: @green;
+	font-family: sans-serif;
+}
+input {
+	display: none !important;
+}
+nav {
+	// outer circle
+	width: 300px;
+	height: 300px;
+	margin: 0;
+	padding: 0;
+	border: solid 1px;
+	border-radius: 50%;
+	//position:relative;
+	position: absolute;
+	left: 30%;
+	top: 50%;
+	margin-left: -150px;
+	margin-top: -150px;
+	overflow: hidden;
+	box-shadow: inset 0 0 20px black;
+
+	&:after {
+		// center circle
+		display: block;
+		content: "";
+		width: 30%;
+		height: 30%;
+		background: none black;
+		border-radius: 50%;
+		border: solid 1px @green;
+		//box-shadow: 0 0 20px black;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		z-index: 100;
+		transform: translate(-50%, -50%);
+	}
+
+	.navitem {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background-color: @dkgreen;
+		border: solid 1px @green;
+		border-width: 0 0 1px 0;
+		position: absolute;
+		top: -50%;
+		left: 50%;
+		transform-origin: bottom left;
+
+		&:hover {
+			background-color: darken(@green, 30%);
+		}
+		&:active {
+			//background-color: @green;
+		}
+	}
+	.navtext {
+		position: absolute;
+		//bottom: 20%; left: 25%;
+		bottom: 0;
+		left: 0;
+	}
+	.generate-menu-items(5);
+	.navitem:last-child {
+		transform: skewX(-18deg);
+		.navtext {
+			transform: rotate(0deg) skewX(18deg) translate(20%, 20%);
+		}
+	}
+}
+.generate-hover-states(5,0);
+
+*/
