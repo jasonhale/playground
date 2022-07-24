@@ -7,7 +7,8 @@ const EXAMPLES = [
   { label: 'pixels', to: 'examples/pixels' },
   { label: 'playground', to: 'examples/playground' },
   { label: 'resize', to: 'examples/resize' },
-  { label: 'navigation', to: 'examples/navigation' }
+  { label: 'navigation', to: 'examples/navigation' },
+  { label: 'simon', to: 'examples/simon' }
 ];
 
 const BASE_CSS = `

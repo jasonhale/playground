@@ -1,6 +1,7 @@
 :root {
   --size: 300px;
   --green: hsl(90, 100%, 49%);
+  --midgreen: hsl(90, 100%, 19%);
   --darkgreen: hsl(90, 100%, 9%);
 }
 
@@ -44,28 +45,30 @@ nav {
     z-index: 100;
   }
 
-  .navitem {
-    --rotate: calc(-72deg * var(--index));
-    --translate: calc(20% * var(--index));
+.navitem {
+  --rotate: calc(-72deg * var(--index));
+  --translate: calc(20% * var(--index));
 
-    display: block;
-    width: 100%;
-    height: 100%;
-    background-color: var(--darkgreen);
-    border: solid 1px var(--green);
-    border-width: 0 0 1px 0;
-    transform-origin: bottom left;
-    transform: rotate(var(--rotate));
-    position: absolute;
-    top: -50%;
-    left: 50%;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-color: var(--darkgreen);
+  border: solid 1px var(--green);
+  border-width: 0 0 1px 0;
+  transform-origin: bottom left;
+  transform: rotate(var(--rotate));
+  position: absolute;
+  top: -50%;
+  left: 50%;
+}
+  .navitem:hover {
+    background-color: var(--midgreen);
   }
-    .navitem:hover {
-      background-color: var(--darkgreen);
-    }
-    .navitem:last-child {
-      transform: skewX(-18deg);
-    }
+  .navitem:last-child {
+    transform:
+      rotate(var(--rotate))
+      skewX(calc(-1deg * (90 - (360 / (var(--index) + 1)))))
+  }
 
 .navtext {
   position: absolute;
@@ -73,55 +76,11 @@ nav {
   left: 0;
   transform: rotate(calc(var(--rotate) * -1)) translate(var(--translate), var(--translate));
 }
+
 .navitem:last-child .navtext {
-  transform: rotate(0deg) skewX(18deg) translate(var(--translate), var(--translate));
+  transform: rotate(0deg) skewX(calc(90deg - (360 / (var(--index) + 1)))) translate(var(--translate), var(--translate));
 }
 
-/* input.hidey:nth-child(n):checked ~ nav .navitem:nth-child(n) {
+.navitem_control:checked + .navitem {
   background-color: var(--green);
-} */
-
-
-/* 
-nav .navitem-0 {
-  transform: rotate(0deg);
 }
-nav .navitem-0 .navtext {
-  transform: rotate(0deg) translate(20%, 20%);
-}
-nav .navitem-1 {
-  transform: rotate(-72deg);
-}
-nav .navitem-1 .navtext {
-  transform: rotate(72deg) translate(20%, 20%);
-}
-nav .navitem-2 {
-  transform: rotate(-144deg);
-}
-nav .navitem-2 .navtext {
-  transform: rotate(144deg) translate(20%, 20%);
-}
-nav .navitem-3 {
-  transform: rotate(-216deg);
-}
-nav .navitem-3 .navtext {
-  transform: rotate(216deg) translate(20%, 20%);
-}
-nav .navitem-4 {
-  transform: rotate(-288deg);
-}
-nav .navitem-4 .navtext {
-  transform: rotate(288deg) translate(20%, 20%);
-}
-nav .navitem-5 {
-  transform: rotate(-360deg);
-}
-nav .navitem-5 .navtext {
-  transform: rotate(360deg) translate(20%, 20%);
-}
-nav .navitem:last-child {
-  transform: skewX(-18deg);
-}
-nav .navitem:last-child .navtext {
-  transform: rotate(0deg) skewX(18deg) translate(20%, 20%);
-} */
