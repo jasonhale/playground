@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Navigation</title>
+    <style>
+      section {
+        margin-bottom: 2rem;
+      }
+    </style>
+    <link href="../../styles.css" rel="stylesheet">
+    <script src="../../components/navigation.js"></script>
+    <script src="./customnav.js"></script>
+    <script>
+      const codesample = {
+        default: `
+&lt;c-nav&gt;
+  &lt;a href="/"&gt;home&lt;/a&gt;
+  &lt;a href="?here"&gt;here&lt;/a&gt;
+  &lt;a href="?there"&gt;there&lt;/a&gt;
+  &lt;a href="?anywhere"&gt;anywhere&lt;/a&gt;
+&lt;/c-nav&gt;`,
+        grid: `
+&lt;c-nav grid&gt;
+  &lt;a href="/"&gt;home&lt;/a&gt;
+  &lt;a href="?here"&gt;here&lt;/a&gt;
+  &lt;a href="?there"&gt;there&lt;/a&gt;
+  &lt;a href="?anywhere"&gt;anywhere&lt;/a&gt;
+&lt;/c-nav&gt;`,
+        radial: `
+&lt;c-nav radial&gt;
+  &lt;a href="/"&gt;home&lt;/a&gt;
+  &lt;a href="?here"&gt;here&lt;/a&gt;
+  &lt;a href="?there"&gt;there&lt;/a&gt;
+  &lt;a href="?anywhere"&gt;anywhere&lt;/a&gt;
+&lt;/c-nav&gt;`
+      };
+    </script>
+  </head>
+  <body>
+    <!-- <playground-nav home></playground-nav> -->
+    <header>
+      <h1>Customizable Navigation</h1>
+      <p>Web component with customizeable navigation items.</p>
+    </header>
+    <main>
+      <section>
+        <code>
+          <pre>
+&lt;c-nav&gt;
+  &lt;a href="/"&gt;home&lt;/a&gt;
+  &lt;a href="?here"&gt;here&lt;/a&gt;
+  &lt;a href="?there"&gt;there&lt;/a&gt;
+  &lt;a href="?anywhere"&gt;anywhere&lt;/a&gt;
+&lt;/c-nav&gt;
+          </pre>
+        </code>
+
+        <fieldset>
+          <legend>Choose Nav Style</legend>
+          <div>
+            <input type="radio" id="default" name="navstyle" value="default" checked>
+            <label for="default">Default</label>
+          </div>
+          <div>
+            <input type="radio" id="grid" name="navstyle" value="grid">
+            <label for="grid">Grid</label>
+          </div>
+          <div>
+            <input type="radio" id="Radial" name="navstyle" value="radial">
+            <label for="Radial">Radial</label>
+          </div>
+        </fieldset>
+
+        <p>
+          <c-nav>
+            <a href="/">home</a>
+            <a href="?here">here</a>
+            <a href="?there">there</a>
+            <a href="?anywhere">anywhere</a>
+          </c-nav>
+        </p>
+      </section>
+    </main>
+
+    <script>
+      const example = document.querySelector('pre');
+      const nav = document.querySelector('c-nav');
+      let currentAtt = '';
+
+      const inputs = document.querySelectorAll('input');
+      inputs.forEach(el => el.addEventListener('change', onchange));
+      function onchange(e) {
+        const val = e.target.value;
+        example.innerHTML = codesample[val];
+        // remove atts
+        if (currentAtt) nav.removeAttribute(currentAtt);
+        currentAtt = val;
+        nav.setAttribute(currentAtt, currentAtt);
+      }
+      </script>
+  </body>
+</html>

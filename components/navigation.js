@@ -8,7 +8,8 @@ const EXAMPLES = [
   { label: 'playground', to: 'examples/playground' },
   { label: 'resize', to: 'examples/resize' },
   { label: 'navigation', to: 'examples/navigation' },
-  { label: 'simon', to: 'examples/simon' }
+  { label: 'simon', to: 'examples/simon' },
+  { label: 'custom navigation', to: 'examples/customnav' }
 ];
 
 const BASE_CSS = `
