@@ -197,7 +197,9 @@ class PlaygroundCustomNav extends HTMLElement {
         this.extrastyles.textContent = PlaygroundCustomNav.RADIAL_CSS + radialstyles;
         break;
       }
-      default: break;
+      default: {
+        this.extrastyles.textContent = '';
+      };
     }
   }
 
