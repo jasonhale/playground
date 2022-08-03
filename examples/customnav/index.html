@@ -94,8 +94,11 @@
         example.innerHTML = codesample[val];
         // remove atts
         if (currentAtt) nav.removeAttribute(currentAtt);
-        currentAtt = val;
-        nav.setAttribute(currentAtt, currentAtt);
+        
+        if (val !== 'default') {
+          currentAtt = val;
+          nav.setAttribute(currentAtt, '');
+        }
       }
       </script>
   </body>
