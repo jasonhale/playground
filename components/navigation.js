@@ -9,6 +9,7 @@ const EXAMPLES = [
   { label: 'resize', to: 'examples/resize' },
   { label: 'navigation', to: 'examples/navigation' },
   { label: 'simon', to: 'examples/simon' },
+  { label: 'calendar', to: 'examples/calendar' },
   { label: 'custom navigation', to: 'examples/customnav' }
 ];
 
