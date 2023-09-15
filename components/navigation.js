@@ -17,7 +17,7 @@ const BASE_CSS = `
 nav {
   --text: var(--text-color, black);
   --navzindex: var(--z-nav, 100);
-
+  
   display: flex;
   flex-flow: row wrap;
   gap: 1rem;
@@ -27,6 +27,11 @@ nav .i {
   display: block;
   padding: 1rem 1.5rem;
   color: var(--text);
+}
+@media print {
+  nav {
+    display: none;
+  }
 }
 `;
 

@@ -23,9 +23,9 @@
       }
       .caldis .day {
         aspect-ratio: 1;
-        border: solid 0px white;
-        border-right-width: 1px;
-        border-bottom-width: 1px;
+        border: solid 1px var(--text-color);
+        /* border-right-width: 1px;
+        border-bottom-width: 1px; */
       }
       .hidden + .day {
         border-left-width: 1px;
@@ -81,7 +81,8 @@
   </body>
   <template id="daytemplate">
     <div class="day">
-      <span class="dm"></span>
+      <span class="day_day"></span>
+      <span class="day_month"></span>
     </div>
   </template>
   <script>
@@ -90,21 +91,33 @@
       event.preventDefault();
       oncreate(event);
     }, false);
+
+    function splitdate(date) {
+      const [year, month, day] = date.split('-');
+      return [year, month - 1, day];
+    }
+
+    function getDates(startdate, enddate) {
+      const start = new Date(...splitdate(startdate));
+      const end = new Date(...splitdate(enddate));
+      return [start, end]
+    }
+
     function oncreate(e) {
       document.querySelector('#calendarDisplay').innerHTML = '';
 
       const dateform = new FormData(e.target);
-      const start = new Date(dateform.get('startdate'));
-      const end = new Date(dateform.get('enddate'));
+      const [start, end] = getDates(dateform.get('startdate'), dateform.get('enddate'))
 
-      let dateArr = [];
-      let currDate = start;
+      const dateArr = [];
+      const currDate = new Date(start);
+      console.log('currDate', currDate);
       function addDate() {
-        const thisday = currDate.getDate();
-        currDate.setDate(thisday + 1);
         if (end >= currDate) {
           const aday = new Date(currDate);
           dateArr.push(aday);
+          const thisday = currDate.getDate();
+          currDate.setDate(thisday + 1);
           addDate();
         }
       }
@@ -112,8 +125,8 @@
 
       // fill backwards to Sunday
       const dayofweek = start.getDay();
-      let backfillArr = [];
-      if (dayofweek > 0) {
+      const backfillArr = [];
+      if (dayofweek < 6) {
         const aday = new Date(start);
         for(let i = 0; i < dayofweek; i++) {
           const thisday = aday.getDate();
@@ -127,19 +140,24 @@
     }
 
     function createDays(datearray, backfill) {
-      console.log(datearray, backfill);
       const output = document.querySelector('#calendarDisplay');
-      function outDay(day, hide) {
-        const daynum = day.getDate();
+      
+      // append day node to page
+      function outDay(day, hide, showMonth = false) {
+        const daynum = +day.getDate();
+        const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(day);
         const template = document.querySelector('#daytemplate').content.cloneNode(true);
         if (hide) {
           template.querySelector('.day').classList.add('hidden');
         }
-        template.querySelector('.dm').innerText = +daynum;
+        template.querySelector('.day_day').innerText = daynum;
+        if (daynum === 1 || showMonth) {
+          template.querySelector('.day_month').innerText = month;
+        }
         output.appendChild(template);
       }
       backfill.forEach(d => outDay(d, true));
-      datearray.forEach(d => outDay(d));
+      datearray.forEach((d, i) => outDay(d, false, i === 0));
     }
   </script>
 </html>
