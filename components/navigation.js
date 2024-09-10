@@ -10,7 +10,8 @@ const EXAMPLES = [
   { label: 'navigation', to: 'examples/navigation' },
   { label: 'simon', to: 'examples/simon' },
   { label: 'calendar', to: 'examples/calendar' },
-  { label: 'custom navigation', to: 'examples/customnav' }
+  { label: 'custom navigation', to: 'examples/customnav' },
+  { label: 'modalings', to: 'examples/modalings' },
 ];
 
 const BASE_CSS = `
