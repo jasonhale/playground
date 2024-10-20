@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Working with a database</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet" />
+    <link href="../../styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <script src="../../components/navigation.js"></script>
+  </head>
+  <body>
+    <playground-nav home></playground-nav>
+
+    <main>
+      <div class="main">
+        <form id="form">
+          <header>
+          <p><b>Goal:</b> allow the user to view their password via toggles without changing the "type" attribute of the <code>&lt;input /&gt;</code> fields.</p>
+          </header>
+          <div class="content">
+            <div class="field">
+              <label>Current Password</label>
+              <div class="input-wrap">
+                <div>
+                  <input class="input _old-pw" type="password" />
+                  <div class="p-view"></div>
+                </div>
+                <button type="button" class="fa fa-eye"></button>
+              </div>
+            </div>
+          </div>
+            <hr/>
+          <div class="content">
+            <div class="field">
+              <label>New Password</label>
+              <div class="input-wrap">
+                <div>
+                  <input class="input _new-pw" type="password" />
+                  <div class="p-view"></div>
+                </div>
+                <button type="button" class="fa fa-eye"></button>
+              </div>
+            </div>
+      
+            <div class="field">
+              <label>Repeat New Password</label>
+              <div class="input-wrap">
+                <div>
+                  <input class="input _new-pw-r" type="password" />
+                  <div class="p-view">sfsfd</div>
+                </div>
+                <button type="button" class="fa fa-eye"></button>
+              </div>
+            </div>
+          </div>
+          <footer>
+            <button class="submit">Submit</button>
+          </footer>
+        </form>
+      </div>
+    </main>
+  </body>
+  <script src="script.js"></script>
+</html>
