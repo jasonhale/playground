@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Modalings</title>
+    <link href="../../styles.css" rel="stylesheet">
+    <script src="../../components/navigation.js"></script>
+    <style>
+      .main {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 2rem;
+      }
+
+      .backdrop::backdrop {
+        background-color: rgba(0 0 0 / .5);
+      }
+    </style>
+  </head>
+  <body>
+    <playground-nav home></playground-nav>
+    <header>
+      <h1>Modals, Dialogs, and other Popups</h1>
+      <p>All without JavaScript</p>
+      <p>Reference on <a href="https://frontendmasters.com/blog/menus-toasts-and-more/">FrontendMasters</a></p>
+    </header>
+    <main class="main">
+      <section>
+        <h2>Using "popover"</h2>
+        <p>Implementing "invoketarget" with a "div" using "popover".</p>
+        <p>
+          <button invoketarget="my-popover">Open popover</button>
+        </p>
+        <div id="my-popover" class="backdrop" popover>
+          <h3>My Popover</h3>
+          <p>This dialog opens and closes without js!</p>
+          <div style="display: flex; justify-content: flex-end;">
+            <button invoketarget="my-popover" >Close</button>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Using "invoketarget"</h2>
+        <p>Trying out a dialog element with a triggering button using "invoketarget".</p>
+        <p>
+          <button invoketarget="my-dialog" invokeaction="showmodal">Open Dialog</button>
+        </p>
+        <dialog id="my-dialog" class="backdrop">
+          <h3>My Dialog</h3>
+          <p>This dialog opens and closes without js!</p>
+          <div style="display: flex; justify-content: flex-end;">
+            <button invoketarget="my-dialog" invokeaction="close">Close</button>
+          </div>
+        </dialog>
+      </section>
+        
+
+    </main>
+  </body>
+  <!-- <script
+    type="module"
+    async
+    src="https://unpkg.com/invokers-polyfill@latest/invoker.min.js"
+  ></script> -->
+</html>
