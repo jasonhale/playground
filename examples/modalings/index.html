@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
   <head>
     <title>Modalings</title>
     <link href="../../styles.css" rel="stylesheet">
@@ -7,12 +7,22 @@
     <style>
       .main {
         display: flex;
-        flex-flow: row wrap;
+        flex-flow: column nowrap;
         gap: 2rem;
       }
 
       .backdrop::backdrop {
         background-color: rgba(0 0 0 / .5);
+      }
+      .grad-backdrop::backdrop {
+        background-image: linear-gradient(
+          45deg,
+          magenta,
+          rebeccapurple,
+          dodgerblue,
+          green
+        );
+        opacity: 0.75;
       }
     </style>
   </head>
@@ -26,40 +36,59 @@
     <main class="main">
       <section>
         <h2>Using "popover"</h2>
-        <p>Implementing "invoketarget" with a "div" using "popover".</p>
+        <p>Implementing "commandfor" with a "div" using "popover".</p>
         <p>
-          <button invoketarget="my-popover">Open popover</button>
+          <button popovertarget="my-popover">Open popover</button>
         </p>
         <div id="my-popover" class="backdrop" popover>
           <h3>My Popover</h3>
           <p>This dialog opens and closes without js!</p>
           <div style="display: flex; justify-content: flex-end;">
-            <button invoketarget="my-popover" >Close</button>
+            <button popovertarget="my-popover" >Close</button>
           </div>
         </div>
       </section>
 
       <section>
-        <h2>Using "invoketarget"</h2>
-        <p>Trying out a dialog element with a triggering button using "invoketarget".</p>
+        <h2>Using "commandfor"</h2>
+        <p>Trying out a dialog element with a triggering button using "commandfor".</p>
         <p>
-          <button invoketarget="my-dialog" invokeaction="showmodal">Open Dialog</button>
+          <button commandfor="my-dialog" command="showmodal">Open Dialog</button>
         </p>
         <dialog id="my-dialog" class="backdrop">
           <h3>My Dialog</h3>
           <p>This dialog opens and closes without js!</p>
           <div style="display: flex; justify-content: flex-end;">
-            <button invoketarget="my-dialog" invokeaction="close">Close</button>
+            <button commandfor="my-dialog" command="close">Close</button>
           </div>
         </dialog>
       </section>
-        
+
+      <section>
+        <h2>Using JS</h2>
+
+        <p><button id="j_btn">Open Dialog via JS</button></p>
+        <dialog id="j_dg" class="grad-backdrop">
+          <h3>My Dialog</h3>
+          <p>This dialog opens and closes via js.</p>
+          <div style="display: flex; justify-content: flex-end;">
+            <button autofocus id="j_close">Close</button>
+          </div>
+        </dialog>
+        <script>
+          const openbtn = document.querySelector('#j_btn');
+          const dg = document.querySelector('#j_dg');
+          const closebtn = document.querySelector('#j_close');
+          openbtn.addEventListener('click', () => dg.showModal());
+          closebtn.addEventListener('click', () => dg.close());
+        </script>
+      </section>
 
     </main>
   </body>
-  <!-- <script
+  <script
     type="module"
     async
     src="https://unpkg.com/invokers-polyfill@latest/invoker.min.js"
-  ></script> -->
+  ></script>
 </html>
