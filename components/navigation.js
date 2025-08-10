@@ -12,7 +12,8 @@ const EXAMPLES = [
   { label: 'calendar', to: 'examples/calendar' },
   { label: 'custom navigation', to: 'examples/customnav' },
   { label: 'modalings', to: 'examples/modalings' },
-  { label: 'sus-form', to: 'examples/sus-form' }
+  { label: 'sus-form', to: 'examples/sus-form' },
+  { label: 'css module', to: 'examples/css' },
 ];
 
 const BASE_CSS = `
