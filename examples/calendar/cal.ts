@@ -1,23 +1,22 @@
-/**
- * @typedef {Object} Day
- * @property {Date} date
- * @property {string} formatted
- * @property {number} month
- * @property {number} year
- * @property {number} day
- * @property {string} monthName
- * @property {boolean} isFiller
- * @property {boolean} isToday
- * @property {boolean} isWeekend
- * @property {string} dayName
- * @property {string} dayShortName
- * @property {number} dayOfYear
- * @property {number} weekOfYear
- * @property {boolean} isFirstDayOfMonth
- * @property {number} dayInRange - The day's position in the range, starting at 1 for the first day
- */
+export type Day = {
+    date: Date;
+    formatted: string;
+    month: number;
+    year: number;
+    day: number;
+    monthName: string;
+    isFiller: boolean;
+    isToday: boolean;
+    isWeekend: boolean;
+    dayName: string;
+    dayShortName: string;
+    dayOfYear: number;
+    weekOfYear: number;
+    isFirstDayOfMonth: boolean;
+    dayInRange?: number;
+}
 
-/** @typedef {Date} RawDay */
+type RawDay = Date;
 
 /**
  * Generates an array of Day objects representing each day in the specified date range.
@@ -28,18 +27,7 @@
  * Can be used to create calendar views.
  */
 
-
-
-
-/**
- * 
- * @param {Date} start 
- * @param {Date} end 
- * @param {Date} today
- * @param {boolean} withBackfill 
- * @returns {Day[] | null} Array of Day objects or null if start date is after end date
- */
-export function getCalendarDays(start, end, today, withBackfill = true) {
+export function getCalendarDays(start: Date, end: Date, today?: Date, withBackfill = true): Day[] | null {
     const startDate = new Date(start);
     startDate.setHours(0,0,0,0);
     const endDate = new Date(end);
@@ -49,7 +37,7 @@ export function getCalendarDays(start, end, today, withBackfill = true) {
     
     const initialRawList = buildRawList(startDate, endDate);
 
-    let rawBackfill = [];
+    let rawBackfill: RawDay[] = [];
     if (withBackfill) {
         rawBackfill = buildBackfill(startDate);
     }
@@ -59,9 +47,9 @@ export function getCalendarDays(start, end, today, withBackfill = true) {
     return calendarList;
 }
 
-function buildRawList(start, end) {
+function buildRawList(start: Date, end: Date) {
     const current = new Date(start);
-    let returnArr = [];
+    let returnArr: RawDay[] = [];
 
     while (current <= end) {
         returnArr.push(new Date(current));
@@ -71,8 +59,8 @@ function buildRawList(start, end) {
     return returnArr;
 }
 
-function buildBackfill(start) {
-    const returnArr = [];
+function buildBackfill(start: Date): RawDay[] {
+    const returnArr: RawDay[] = [];
     const dayOfWeek = start.getDay();
     if (dayOfWeek === 0) return returnArr;
 
@@ -86,8 +74,8 @@ function buildBackfill(start) {
     return returnArr;
 }
 
-function composeList(rawList, backfill = [], today) {
-    const finDateArr = [];
+function composeList(rawList: RawDay[], backfill: RawDay[] = [], today?: Date): Day[] {
+    const finDateArr: Day[] = [];
 
     backfill.forEach(date => {
         finDateArr.push(makeDayObject(date, true, today));
@@ -100,7 +88,7 @@ function composeList(rawList, backfill = [], today) {
     return finDateArr;
 }
 
-function makeDayObject(date, isFiller = false, today, index) {
+function makeDayObject(date: Date, isFiller = false, today?: Date, index?: number): Day {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
@@ -110,7 +98,7 @@ function makeDayObject(date, isFiller = false, today, index) {
     const dayName = date.toLocaleString('default', { weekday: 'long' });
     const dayShortName = date.toLocaleString('default', { weekday: 'short' });
     const startOfYear = new Date(date.getFullYear(), 0, 0);
-    const diff = date - startOfYear;
+    const diff = (date as any) - (startOfYear as any);
     const oneDay = 1000 * 60 * 60 * 24;
     const dayOfYear = Math.floor(diff / oneDay);
     const isFirstDayOfMonth = day === 1;
