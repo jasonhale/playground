@@ -57,36 +57,13 @@
             document.querySelector('#calendarDisplay').innerHTML = '';
 
             const dateform = new FormData(e.target);
-            const [start, end] = getDates(dateform.get('startdate'), dateform.get('enddate'))
+            const [start, end] = getDates(dateform.get('startdate'), dateform.get('enddate'));
+            const today = new Date();
+            today.setHours(0,0,0,0);
 
-            const dateArr = [];
-            const currDate = new Date(start);
-            console.log('currDate', currDate);
-            function addDate() {
-                if (end >= currDate) {
-                    const aday = new Date(currDate);
-                    dateArr.push(aday);
-                    const thisday = currDate.getDate();
-                    currDate.setDate(thisday + 1);
-                    addDate();
-                }
-            }
-            addDate();
+            const dateArr = getCalendarDays(start, end, today);
 
-            // fill backwards to Sunday
-            const dayofweek = start.getDay();
-            const backfillArr = [];
-            if (dayofweek < 6) {
-                const aday = new Date(start);
-                for(let i = 0; i < dayofweek; i++) {
-                    const thisday = aday.getDate();
-                    aday.setDate(thisday - 1);
-                    const a = new Date(aday);
-                    backfillArr.unshift(a);
-                }
-            }
-
-            createDays(dateArr, backfillArr);
+            buildDays(dateArr);
         }
 
         function splitdate(date) {
@@ -100,25 +77,23 @@
             return [start, end]
         }
 
-        function createDays(datearray, backfill) {
+        function buildDays(datearray) {
             const output = document.querySelector('#calendarDisplay');
             
             // append day node to page
-            function outDay(day, hide, showMonth = false) {
-                const daynum = +day.getDate();
-                const month = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(day);
+            function outDay(day, showMonth = false) {
                 const template = document.querySelector('#daytemplate').content.cloneNode(true);
-                if (hide) {
+                if (day.isFiller) {
                     template.querySelector('.day').classList.add('hidden');
+                    template.querySelector('.day').classList.add('filler');
                 }
-                template.querySelector('.day_day').innerText = daynum;
-                if (daynum === 1 || showMonth) {
-                    template.querySelector('.day_month').innerText = month;
+                template.querySelector('.day_day').innerText = day.day;
+                if (day.day === 1 || showMonth) {
+                    template.querySelector('.day_month').innerText = day.monthName;
                 }
                 output.appendChild(template);
             }
-            backfill.forEach(d => outDay(d, true));
-            datearray.forEach((d, i) => outDay(d, false, i === 0));
+            datearray.forEach((d, i) => outDay(d, i === 0));
         }
     </script>
 </html>

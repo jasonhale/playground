@@ -39,7 +39,7 @@
  * @param {boolean} withBackfill 
  * @returns {Day[] | null} Array of Day objects or null if start date is after end date
  */
-export function getCalendarDays(start, end, today, withBackfill = true) {
+function getCalendarDays(start, end, today, withBackfill = true) {
     const startDate = new Date(start);
     startDate.setHours(0,0,0,0);
     const endDate = new Date(end);
