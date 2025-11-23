@@ -36,10 +36,11 @@
  * @param {Date} start 
  * @param {Date} end 
  * @param {Date} today
- * @param {boolean} withBackfill 
+ * @param {boolean} frontFill- Whether to add filler days to the start of the list to complete the week
+ * @param {boolean} endFill - Whether to add filler days to the end of the list to complete the week
  * @returns {Day[] | null} Array of Day objects or null if start date is after end date
  */
-function getCalendarDays(start, end, today, withBackfill = true) {
+function getCalendarDays(start, end, today, frontFill = true, endFill = false) {
     const startDate = new Date(start);
     startDate.setHours(0,0,0,0);
     const endDate = new Date(end);
@@ -49,12 +50,16 @@ function getCalendarDays(start, end, today, withBackfill = true) {
     
     const initialRawList = buildRawList(startDate, endDate);
 
-    let rawBackfill = [];
-    if (withBackfill) {
-        rawBackfill = buildBackfill(startDate);
+    let rawFrontFill = [];
+    if (frontFill) {
+        rawFrontFill = buildFrontFill(startDate);
+    }
+    let rawEndFill = [];
+    if (endFill) {
+        rawEndFill = buildEndFill(endDate);
     }
 
-    const calendarList = composeList(initialRawList, rawBackfill, today);
+    const calendarList = composeList(initialRawList, rawFrontFill, today);
 
     return calendarList;
 }
@@ -71,15 +76,30 @@ function buildRawList(start, end) {
     return returnArr;
 }
 
-function buildBackfill(start) {
+function buildFrontFill(currDay) {
     const returnArr = [];
-    const dayOfWeek = start.getDay();
+    const dayOfWeek = currDay.getDay();
     if (dayOfWeek === 0) return returnArr;
 
     const daysToAdd = dayOfWeek;
     for (let i = daysToAdd; i > 0; i--) {
-        const newDate = new Date(start);
+        const newDate = new Date(currDay);
         newDate.setDate(newDate.getDate() - i);
+        returnArr.push(newDate);
+    }
+
+    return returnArr;
+}
+
+function buildEndFill(currDay) {
+    const returnArr = [];
+    const dayOfWeek = currDay.getDay();
+    if (dayOfWeek === 6) return returnArr;
+
+    const daysToAdd = 6 - dayOfWeek;
+    for (let i = daysToAdd; i > 0; i--) {
+        const newDate = new Date(start);
+        newDate.setDate(newDate.getDate() + i);
         returnArr.push(newDate);
     }
 
