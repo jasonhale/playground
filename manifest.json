@@ -1,0 +1,31 @@
+{
+    "name": "Playground Site",
+    "short_name": "Playground",
+    "description": "My own little interactive playground site.",
+    "lang": "en-US",
+    "start_url": "./",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "any",
+    "theme_color": "#0a84ff",
+    "background_color": "#ffffff",
+    "categories": ["tutorial", "education", "development"],
+    "icons": [
+        {
+            "src": "icons/penguin-lg.svg",
+            "sizes": "150x150",
+            "type": "image/svg+xml",
+            "purpose": "any"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Playground",
+            "short_name": "Home",
+            "description": "My own little interactive playground site.",
+            "url": "/",
+            "icons": [{ "src": "icons/penguin-lg.png", "sizes": "150x150" }]
+        }
+    ],
+    "prefer_related_applications": false
+}
