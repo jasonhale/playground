@@ -14,7 +14,7 @@ body {
 .hidey { display: none; }
 
 /* outer circle */
-nav {
+.simon {
   width: var(--size);
   height: var(--size);
   margin: 0;
@@ -30,7 +30,7 @@ nav {
 }
 
   /* center circle */
-  nav::after {
+  .simon::after {
     content: '';
     display: block;
     width: 30%;

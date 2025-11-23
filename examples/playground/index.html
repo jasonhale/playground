@@ -1,13 +1,19 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
-    <title>Playground</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="../../styles.css" rel="stylesheet">
-    <script src="../../components/navigation.js"></script>
-  </head>
-  <body>
-    <playground-nav home></playground-nav>
+
+<head>
+  <title>Playground</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="../../styles.css" rel="stylesheet">
+  <script src="../../components/navigation.js"></script>
+</head>
+
+<body>
+  <playground-nav home></playground-nav>
+  <header>
+    <h1>Playground</h1>
+  </header>
+  <main>
 
     <div class="ani1">
       <span></span>
@@ -15,20 +21,22 @@
 
     <div class="ani2">
       <svg>
-        <circle cx="125" cy="125" r="120"/>
-        <polygon/>
+        <circle cx="125" cy="125" r="120" />
+        <polygon />
       </svg>
     </div>
 
     <div class="ani3">
       <svg>
         <filter id="motion-blur" x="-25%" width="150%" color-interpolation-filters="sRGB">
-          <feGaussianBlur in="SourceGraphic"/>
+          <feGaussianBlur in="SourceGraphic" />
         </filter>
-        <circle class="c" r="75" cx="100" cy="75" fill="rgb(30, 240, 200)" filter="url(#motion-blur)"/>
+        <circle class="c" r="75" cx="100" cy="75" fill="rgb(30, 240, 200)" filter="url(#motion-blur)" />
       </svg>
     </div>
-    
-    <script src="main.js"></script>
-  </body>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+
 </html>
