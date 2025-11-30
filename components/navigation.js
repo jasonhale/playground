@@ -14,6 +14,7 @@ const EXAMPLES = [
   { label: 'modalings', to: 'examples/modalings' },
   { label: 'sus-form', to: 'examples/sus-form' },
   { label: 'css module', to: 'examples/css' },
+  { label: 'scrolling', to:'examples/scrolling' }
 ];
 
 const BASE_CSS = `
